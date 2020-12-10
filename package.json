@@ -1,0 +1,31 @@
+{
+  "name": "auth-tool",
+  "version": "0.0.1",
+  "author": "bwrong<ibwrong@foxmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "auth",
+    "vue"
+  ],
+  "description": "vue项目资源（菜单、路由、按钮...）权限控制解决方案",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "pub": "nrm use npm && npm publish && nrm use taobao"
+  },
+  "homepage": "https://github.com/BWrong/auth-tool.git",
+  "bugs": {
+    "url": "https://github.com/BWrong/auth-tool.git/issues",
+    "email": "ibwrong@foxmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BWrong/auth-tool.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
