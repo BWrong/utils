@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "bwrong<ibwrong@foxmail.com>",
   "license": "MIT",
   "keywords": [
@@ -12,8 +12,7 @@
   "module": "dist/index.esm.js",
   "scripts": {
     "build": "webpack --mode=production",
-    "pub": "nrm use npm && npm publish --access public&& nrm use taobao",
-    "publish:public": "npm publish --access public"
+    "pub": "npm run build && npm publish --access public"
   },
   "homepage": "https://github.com/BWrong/auth-tool.git",
   "bugs": {
@@ -26,6 +25,9 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-loader": "^8.2.2",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0"
   }

@@ -3,9 +3,9 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-12-10 11:04:57
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-13 21:28:30
+ * @LastEditTime: 2020-12-13 22:01:04
  */
-import { authDirectiveSrc } from './directive';
+import { authDirective as authDirectiveSrc } from './directive';
 import ganerAuthDataSrc from './ganerAuthData';
 import * as utils from './util';
 

@@ -4,20 +4,25 @@ module.exports = {
   output: {
     path: resolve('./dist'),
     filename: 'index.js',
-    library: 'auth-tool',
+    library: 'authTool',
     sourceMapFilename: '[file].map',
     libraryTarget: 'umd'
   },
   devtool: 'source-map',
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.tsx?$/i,
-  //       loader: 'ts-loader',
-  //       exclude: /node_modules/
-  //     }
-  //   ]
-  // },
+  module: {
+    rules: [
+      // {
+      //   test: /\.tsx?$/i,
+      //   loader: 'ts-loader',
+      //   exclude: /node_modules/
+      // },
+       {
+        test: /\.js$/i,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx']
   }
