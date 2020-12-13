@@ -1,6 +1,6 @@
 {
-  "name": "auth-tool",
-  "version": "0.0.1",
+  "name": "@bwrong/auth-tool",
+  "version": "1.0.0",
   "author": "bwrong<ibwrong@foxmail.com>",
   "license": "MIT",
   "keywords": [
