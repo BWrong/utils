@@ -3,15 +3,15 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-12-10 11:04:57
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-13 20:30:39
+ * @LastEditTime: 2020-12-13 21:28:30
  */
-import { authDirective } from './directive';
-import ganerAuthData from './ganerAuthData';
-import util from './util';
+import { authDirectiveSrc } from './directive';
+import ganerAuthDataSrc from './ganerAuthData';
+import * as utils from './util';
 
-export const util = util;
-export const ganerAuthData = ganerAuthData;
-export const authDirective = authDirective;
+export const util = utils;
+export const ganerAuthData = ganerAuthDataSrc;
+export const authDirective = authDirectiveSrc;
 export default {
   ganerAuthData,
   authDirective,

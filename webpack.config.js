@@ -4,7 +4,7 @@ module.exports = {
   output: {
     path: resolve('./dist'),
     filename: 'index.js',
-    library: 'v-video',
+    library: 'auth-tool',
     sourceMapFilename: '[file].map',
     libraryTarget: 'umd'
   },
