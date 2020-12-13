@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "bwrong<ibwrong@foxmail.com>",
   "license": "MIT",
   "keywords": [
@@ -12,7 +12,7 @@
   "module": "dist/index.esm.js",
   "scripts": {
     "build": "webpack --mode=production",
-    "pub": "nrm use npm && npm publish && nrm use taobao",
+    "pub": "nrm use npm && npm publish --access public&& nrm use taobao",
     "publish:public": "npm publish --access public"
   },
   "homepage": "https://github.com/BWrong/auth-tool.git",
