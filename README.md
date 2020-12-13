@@ -1,7 +1,7 @@
 # Auth-Tool
-![npm](https://img.shields.io/npm/dt/auth-tool)
-![npm](https://img.shields.io/npm/v/auth-tool)
-![NPM](https://img.shields.io/npm/l/auth-tool)
+![npm](https://img.shields.io/npm/dt/@bwrong/auth-tool)
+![npm](https://img.shields.io/npm/v/@bwrong/auth-tool)
+![NPM](https://img.shields.io/npm/l/@bwrong/auth-tool)
 ![GitHub stars](https://img.shields.io/github/stars/bwrong/auth-tool?style=social)
 
 vue项目资源权限控制解决方案。管理系统一般都会包含权限控制，登录不同的用户可以看到不同的资源（菜单、路由、按钮等），此工具封装了权限处理逻辑，资源权限和路由仅通过一个权限标识关联对应，最大程度降低耦合，通过这个标识可以完成很多功能：
