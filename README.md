@@ -12,7 +12,10 @@ vue 项目资源权限控制解决方案。管理系统一般都会包含权限�
 3. 内置了权限指令，可以通过将某个权限标识和生成的权限集做对比，从而判断是否具有权限来决定显示状态。
 
 ### 使用方法
-
+#### 安装
+```shell
+npm install -S @bwrong/auth-tool
+```
 #### 生成相关数据
 
 ##### 通过调用`ganerAuthData(options)`生成相关数据
@@ -119,8 +122,8 @@ import { authDirective } from '@bwrong/auth-tool';
 let authMap = null;
 // 注册权限指令
 Vue.use(authDirective, {
-  hasAuth(authValue) {
-    // 需要传入对比方法，返回false的资源将被移除
+  directiveName: 'auth', // 注册指令的名字，默认为auth
+  hasAuth(authValue) { // 需要传入对比方法，返回false的资源将被移除，默认均返回true，不过滤
     authMap = authMap || getStorage('permissions') || [];
     return authMap.includes(authValue);
   }
