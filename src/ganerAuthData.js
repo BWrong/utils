@@ -3,7 +3,7 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-13 20:29:13
+ * @LastEditTime: 2020-12-16 08:55:47
  */
 let routeMap = {}; // 路由映射表
 
@@ -38,9 +38,12 @@ function _getAuthRoutes(routes = [], authMap = {}) {
   return routes.filter((route) => {
     let newRoute = { ...route };
     if (_checkAuth(newRoute, authMap)) {
+      if (route.meta?.permission) {
+        // 将路由存入routeMap
+        routeMap[route.meta.permission] = route;
+        route.meta.auth = authMap[route.meta.permission];
+      }
       newRoute.children && (newRoute.children = _getAuthRoutes(newRoute.children, authMap));
-      // 将路由存入routeMap
-      route.meta?.permission && (routeMap[route.meta.permission] = route);
       return true;
     }
     return false;
