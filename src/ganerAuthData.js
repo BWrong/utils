@@ -4,7 +4,7 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-17 11:56:01
+ * @LastEditTime: 2020-12-17 14:06:23
  */
 let routeMap = {}; // 路由映射表
 const defaultAuthKey = 'permission';
@@ -30,7 +30,6 @@ export default ({ routes = [], permissions = [], authKey = defaultAuthKey, check
  * @param {*} authKey  权限集权限标识key名
  */
 function _ganAuthMap(permissions = [], authKey = defaultAuthKey) {
-  console.log(permissions);
   return permissions.reduce((temp, item) => ((temp[item[authKey]] = item), temp), {});
 }
 /**
