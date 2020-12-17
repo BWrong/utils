@@ -63,7 +63,7 @@ export default [
 ];
 ```
 
-- permissions：权限映射表
+- permissions：权限映射表。
 
 ```json
 [
@@ -100,8 +100,38 @@ export default [
 ]
 ```
 
-- authKey：权限标识的 key 名，上面permissions（权限映射表）中用来标识权限标识的key名，因为permissions数据由后端提供，所以权限标识的key不同项目可能会不一样，可通过authKey参数配置修改。但是此配置不影响routes路由配置表中的key名，因为路由由前端自己配置，可以保证数据格式的统一。
+- authKey：配置权限标识的 key 名，默认为`permission`。
+上面permissions（权限映射表）中用来标识权限标识的key名，因为permissions数据由后端提供，所以权限标识的key不同项目可能会不一样，可通过authKey参数配置修改。但是此配置不影响routes路由配置表中的key名，因为路由由前端自己配置，可以保证数据格式的统一。
 
+- `checkAuth(route, authMap)`: 权限过滤方法。
+返回true通过校验，返回false则会忽略该项。默认为：
+```js
+/**
+ * 清洗方法，权限标识不存在或者存在且匹配,则返回true
+ * @param {*} route 检测的路由对象
+ * @param {*} authMap 权限标识表，map
+ */
+function checkAuth(route, authMap) {
+  return route.meta?.permission ? !!authMap[route.meta.permission] : true;
+}
+```
+- `mergeMeta(routeMeta, authMeta)`: 定义route.meta数据的合并策略。
+返回合并后的数据，返回的数据会覆盖`route.meta`。
+```js
+/**
+ * route.meta数据合并策略
+ * @param {*} routeMeta 路由meta数据
+ * @param {*} authMeta 路由对应权限菜单数据
+ */
+function mergeMeta(routeMeta, authMeta) {
+  return {
+    ...routeMeta,
+    ...authMeta
+  }
+}
+```
+
+调用方法并生成需要的数据：
 ```js
 import { ganerAuthData } from '@bwrong/auth-tool';
 const { authMap, routes, menus } = ganerAuthData({ routes, permissions, authKey: 'permission' });
