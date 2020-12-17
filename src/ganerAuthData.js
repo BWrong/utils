@@ -1,12 +1,17 @@
+
 /*
  * @Author: Bwrong
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-17 10:27:15
+ * @LastEditTime: 2020-12-17 11:56:01
  */
 let routeMap = {}; // 路由映射表
-export default ({ routes = [], permissions = [], authKey = 'permission', checkAuth = _checkAuth, mergeMeta = _mergeMeta }) => {
+const defaultAuthKey = 'permission';
+export default ({ routes = [], permissions = [], authKey = defaultAuthKey, checkAuth = _checkAuth, mergeMeta = _mergeMeta }) => {
+  // 校验参数
+  _checkParamIsArray(routes, 'routes');
+  _checkParamIsArray(permissions, 'permissions');
   // 权限映射表
   const authMap = _ganAuthMap(permissions, authKey);
   // 清洗后，有权限额路由，用于动态注册路由
@@ -24,7 +29,8 @@ export default ({ routes = [], permissions = [], authKey = 'permission', checkAu
  * @param {*} permissions  权限映射表
  * @param {*} authKey  权限集权限标识key名
  */
-function _ganAuthMap(permissions, authKey) {
+function _ganAuthMap(permissions = [], authKey = defaultAuthKey) {
+  console.log(permissions);
   return permissions.reduce((temp, item) => ((temp[item[authKey]] = item), temp), {});
 }
 /**
@@ -40,7 +46,7 @@ function _getAuthRoutes(routes = [], authMap = {}, checkAuth = _checkAuth, merge
       if (route.meta?.permission) {
         // 将路由存入routeMap, 方便_addPathOfMenus查找路由
         routeMap[route.meta.permission] = route;
-        route.meta = mergeMeta(route.meta, authMap[route.meta.permission])
+        route.meta = mergeMeta(route.meta, authMap[route.meta.permission]);
       }
       route.children && (route.children = _getAuthRoutes(route.children, authMap));
       return true;
@@ -55,7 +61,7 @@ function _getAuthRoutes(routes = [], authMap = {}, checkAuth = _checkAuth, merge
  * @param {*} menus  菜单数据
  * @param {*} authKey 权限集权限标识key名
  */
-function _addPathOfMenus(routeMap = {}, menus = [], authKey) {
+function _addPathOfMenus(routeMap = {}, menus = [], authKey=defaultAuthKey) {
   return menus.map((item) => {
     item.url = (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
@@ -78,5 +84,13 @@ function _checkAuth(route, authMap) {
  * @param {*} authMeta 路由对应权限菜单数据
  */
 function _mergeMeta(routeMeta, authMeta) {
-  return Object.assign(routeMeta, authMeta)
+  return Object.assign(routeMeta, authMeta);
+}
+/**
+ * 校验参数是否为数组
+ * @param {*} param
+ * @param {*} key
+ */
+function _checkParamIsArray(param, key) {
+  return Array.isArray(param) || (console.error(`@bwrong/auth-tool/ganerAuthData: ${key}参数传入数据类型不正确，请传入Array数据类型`),false);
 }

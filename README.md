@@ -124,10 +124,7 @@ function checkAuth(route, authMap) {
  * @param {*} authMeta 路由对应权限菜单数据
  */
 function mergeMeta(routeMeta, authMeta) {
-  return {
-    ...routeMeta,
-    ...authMeta
-  }
+  return Object.assign(routeMeta, authMeta)
 }
 ```
 

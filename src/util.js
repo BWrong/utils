@@ -37,13 +37,3 @@ export function getParentsFromArray({id, data, idName = 'id', pidName = 'parentI
   }
   return result;
 }
-/**
- * 从permission获取所有父级permission,注意，此方式要求permission命名遵循层级关系
- * @param permission
- */
-export function getParentsFromPermission(permission) {
-  return permission.split('/').reduce((temp, item) => {
-    temp.push((temp[temp.length - 1] || '') + (item ? '/' : '') + item);
-    return temp;
-  }, []);
-}
