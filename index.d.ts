@@ -10,7 +10,7 @@ export interface AuthData{
   routes: Route[],
   menus: object[]
 }
-export type ganerAuthData = (routes: Route[], permissions: object[], authKey?: string, checkAuth?: CheckAuth, mergeMeta?: MergeMeta) => AuthData;
+export type GanerAuthData = (routes: Route[], permissions: object[], authKey?: string, checkAuth?: CheckAuth, mergeMeta?: MergeMeta) => AuthData;
 
 
 export interface AuthDirective<T> {
