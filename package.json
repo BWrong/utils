@@ -9,6 +9,7 @@
   ],
   "description": "vue项目资源（菜单、路由、按钮...）权限控制解决方案",
   "main": "dist/index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "build": "webpack --mode=production",
     "pub": "npm run build && npm publish --access public"
