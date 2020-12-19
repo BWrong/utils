@@ -4,7 +4,7 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-17 14:06:23
+ * @LastEditTime: 2020-12-19 23:02:23
  */
 let routeMap = {}; // 路由映射表
 const defaultAuthKey = 'permission';
@@ -30,6 +30,7 @@ export default ({ routes = [], permissions = [], authKey = defaultAuthKey, check
  * @param {*} authKey  权限集权限标识key名
  */
 function _ganAuthMap(permissions = [], authKey = defaultAuthKey) {
+  // TODO:支持嵌套结构
   return permissions.reduce((temp, item) => ((temp[item[authKey]] = item), temp), {});
 }
 /**
@@ -64,7 +65,7 @@ function _addPathOfMenus(routeMap = {}, menus = [], authKey=defaultAuthKey) {
   return menus.map((item) => {
     item.url = (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
-      item.children = this._addPathOfMenus(routeMap, menus, authKey);
+      item.children = _addPathOfMenus(routeMap, menus, authKey);
     }
     return item;
   });
