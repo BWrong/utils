@@ -12,7 +12,9 @@
   "typings": "index.d.ts",
   "scripts": {
     "build": "webpack --mode=production",
-    "pub": "npm run build && npm publish --access public"
+    "pub": "npm run build && npm publish --access public",
+    "prepublishOnly": "npm run build",
+    "build2": "rollup -c"
   },
   "homepage": "https://github.com/BWrong/auth-tool.git",
   "bugs": {
@@ -23,12 +25,25 @@
     "type": "git",
     "url": "https://github.com/BWrong/auth-tool.git"
   },
+  "engines": {
+    "node": ">=12"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.js.map",
+    "src/*",
+    "index.d.ts"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-eslint": "^8.0.1",
+    "@rollup/plugin-node-resolve": "^11.0.1",
     "babel-loader": "^8.2.2",
-    "husky": "^4.3.6",
+    "rollup": "^2.35.1",
     "webpack": "^5.10.3",
     "webpack-cli": "^4.2.0"
   }

@@ -1,5 +1,0 @@
-{
-    "hooks": {
-        "pre-rebase": "npm run pub"
-    }
-}

@@ -26,8 +26,8 @@ export interface AuthDirectiveOptions{
   directiveName?: string,
   hasAuth?: (permission: string) => boolean
 }
-interface AuthDirective<T> {
-  install: (Vue: any, options?: T) => void;
+interface AuthDirective {
+  install: (Vue: any, options?) => void;
   [key: string]: any;
 }
 
