@@ -7,7 +7,7 @@ install:
 script:
     - yarn build
 after_success:
-    - npm publish --access public
+    - npm publish
     - git config --global user.name "${U_NAME}"
     - git config --global user.email "${U_EMAIL}"
     - git add .
