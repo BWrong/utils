@@ -33,7 +33,6 @@
   },
   "files": [
     "lib/*",
-    "dist/*",
     "src/*",
     "index.d.ts"
   ],
