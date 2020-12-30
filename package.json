@@ -13,8 +13,6 @@
   "typings": "index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "prepublish": "npm run build && nrm use npm",
-    "postpublish": "nrm use taobao",
     "commit": "git add . && git-cz",
     "release": "standard-version --infile CHANGELOG.md"
   },
