@@ -3,7 +3,7 @@ node_js:
   - 14
 cache: npm
 install:
-  - npm
+  - npm install
 os:
   - linux
 
