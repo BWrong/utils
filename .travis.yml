@@ -22,6 +22,7 @@ jobs:
       script:
         - echo 'start build...'
         - npm run build
+        - echo 'build success'
       deploy: deploy
         - provider: npm
           email: wang11535041@qq.com
