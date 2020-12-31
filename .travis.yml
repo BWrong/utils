@@ -10,6 +10,7 @@ os:
 stages:
   - name: release
   - name: build
+  - deploy
 
 jobs:
   include:
@@ -24,7 +25,7 @@ jobs:
         - echo 开始打包...
         - npm run build
         - echo 打包完成
-      deploy:
+    deploy:
         provider: npm
         email: wang11535041@qq.com
         api_key: "$NPM_TOKEN"
