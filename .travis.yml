@@ -2,10 +2,8 @@ language: node_js
 node_js:
   - 14
 cache: npm
-install:
-  - npm install
-os:
-  - linux
+install: npm install
+os: linux
 
 stages:
   - name: release
@@ -14,28 +12,25 @@ stages:
 jobs:
   include:
     - stage: release
-      script:
-        - npm run release
+      script: npm run release
 
     - stage: build
       script:
         - echo 'start build...'
         - npm run build
         - echo 'build success'
-      deploy: deploy
-        - provider: npm
-          email: wang11535041@qq.com
-          api_key: "$NPM_TOKEN"
-          cleanup: false
-          on:
-            tags: true
-            branch: master
-          tag: latest
-
-
-after_deploy:
-  - git config --global user.name "$U_NAME"
-  - git config --global user.email "$U_EMAIL"
-  - git add .
-  - git commit -m "deploy"
-  - git push --quiet --force "https://$GH_TOKEN@$GH_REF" master:$P_BRANCH
+      deploy:
+        provider: npm
+        email: "$NPM_EMAIL"
+        api_key: "$NPM_TOKEN"
+        cleanup: false
+        on:
+          tags: true
+          branch: master
+        tag: latest
+      after_deploy:
+        - git config --global user.name "$U_NAME"
+        - git config --global user.email "$U_EMAIL"
+        - git add .
+        - git commit -m "deploy"
+        - git push --quiet --force "https://$GH_TOKEN@$GH_REF" master:$P_BRANCH
