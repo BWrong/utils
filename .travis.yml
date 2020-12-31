@@ -1,43 +1,43 @@
 language: node_js
 node_js:
-    - 14
+  - 14
 cache: npm
 install:
-    - npm
+  - npm
 os:
-    - linux
+  - linux
 
 stages:
-    - name: deploy
-    - name: release
+  - name: deploy
+  - name: release
 
 jobs:
-    include:
-        - state: deploy
-          script:
-            - echo: "开始打包..."
-            - npm run build
-            - npm run release
-            - echo: "打包完成"
+  include:
+    - state: deploy
+      script:
+        - echo: '开始打包...'
+        - npm run build
+        - npm run release
+        - echo: '打包完成'
 
-        - state: release
-          script:
-            - echo: "开始生成版本..."
-            - npm run release
-            - echo: "版本生成完成"
-        deploy:
-            provider: npm
-            email: wang11535041@qq.com
-            api_key: "$NPM_TOKEN"
-            skip_cleanup: true
-            on:
-                tags: true
-                branch: master
-            tag: latest
+    - state: release
+      script:
+        - echo: '开始生成版本...'
+        - npm run release
+        - echo: '版本生成完成'
+      deploy:
+        provider: npm
+        email: wang11535041@qq.com
+        api_key: '$NPM_TOKEN'
+        skip_cleanup: true
+        on:
+          tags: true
+          branch: master
+        tag: latest
 
 after_success:
-    - git config --global user.name "${U_NAME}"
-    - git config --global user.email "${U_EMAIL}"
-    - git add .
-    - git commit -m 'deploy'
-    - git push --quiet --force "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
+  - git config --global user.name "${U_NAME}"
+  - git config --global user.email "${U_EMAIL}"
+  - git add .
+  - git commit -m 'deploy'
+  - git push --quiet --force "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
