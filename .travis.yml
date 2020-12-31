@@ -20,6 +20,7 @@ jobs:
 
     - stage: build
       script:
+        - echo 'start build...'
         - npm run build
       deploy: deploy
         - provider: npm
