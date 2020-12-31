@@ -8,18 +8,11 @@ os:
     - linux
 
 stages:
-    - check
     - name: deploy
     - name: release
 
 jobs:
     include:
-        - state: test
-          script:
-            - echo "环境检查 ..."
-            - node --version
-            - npm --veison
-
         - state: deploy
           script:
             - echo: "开始打包..."
