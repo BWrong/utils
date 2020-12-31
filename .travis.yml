@@ -10,7 +10,6 @@ os:
 stages:
   - name: release
   - name: build
-  - deploy
 
 jobs:
   include:
