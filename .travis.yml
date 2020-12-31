@@ -1,9 +1,9 @@
 language: node_js
 node_js:
     - 14
-cache: yarn
+cache: npm
 install:
-    - yarn
+    - npm
 os:
     - linux
 
@@ -23,8 +23,8 @@ jobs:
         - state: deploy
           script:
             - echo: "开始打包..."
-            - yarn build
-            - yarn release
+            - npm run build
+            - npm run release
             - echo: "打包完成"
 
         - state: release
