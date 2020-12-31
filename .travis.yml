@@ -4,10 +4,45 @@ node_js:
 cache: yarn
 install:
     - yarn
-script:
-    - yarn build
+os:
+    - linux
+
+stages:
+    - check
+    - name: deploy
+    - name: release
+
+jobs:
+    include:
+        - state: test
+          script:
+            - echo "环境检查 ..."
+            - node --version
+            - npm --veison
+
+        - state: deploy
+          script:
+            - echo: "开始打包..."
+            - yarn build
+            - yarn release
+            - echo: "打包完成"
+
+        - state: release
+          script:
+            - echo: "开始生成版本..."
+            - npm run release
+            - echo: "版本生成完成"
+        deploy:
+            provider: npm
+            email: wang11535041@qq.com
+            api_key: "$NPM_TOKEN"
+            skip_cleanup: true
+            on:
+                tags: true
+                branch: master
+            tag: latest
+
 after_success:
-    - npm publish
     - git config --global user.name "${U_NAME}"
     - git config --global user.email "${U_EMAIL}"
     - git add .
