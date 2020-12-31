@@ -14,26 +14,26 @@ stages:
 
 jobs:
   include:
-    - state: release
+    - stage: release
       script:
         - echo 开始生成版本...
         - npm run release
         - echo 版本生成完成
 
-    - state: build
+    - stage: build
       script:
         - echo 开始打包...
         - npm run build
         - echo 打包完成
-    deploy:
-        provider: npm
-        email: wang11535041@qq.com
-        api_key: "$NPM_TOKEN"
-        skip_cleanup: true
-        on:
-          tags: true
-          branch: master
-        tag: latest
+      deploy:
+          provider: npm
+          email: wang11535041@qq.com
+          api_key: "$NPM_TOKEN"
+          cleanup: false
+          on:
+            tags: true
+            branch: master
+          tag: latest
 
 
 after_success:
