@@ -27,7 +27,7 @@ jobs:
         - echo '打包完成'
 
 deploy:
-    provider: npm
+  - provider: npm
     email: wang11535041@qq.com
     api_key: "$NPM_TOKEN"
     cleanup: false
