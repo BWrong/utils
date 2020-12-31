@@ -25,16 +25,15 @@ jobs:
         - echo '开始打包...'
         - npm run build
         - echo '打包完成'
-
-deploy:
-  - provider: npm
-    email: wang11535041@qq.com
-    api_key: "$NPM_TOKEN"
-    cleanup: false
-    on:
-      tags: true
-      branch: master
-    tag: latest
+      deploy: deploy
+        - provider: npm
+          email: wang11535041@qq.com
+          api_key: "$NPM_TOKEN"
+          cleanup: false
+          on:
+            tags: true
+            branch: master
+          tag: latest
 
 
 after_deploy:
