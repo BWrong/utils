@@ -15,15 +15,15 @@ jobs:
   include:
     - state: release
       script:
-        - echo: "开始生成版本..."
+        - "echo: '开始生成版本...'"
         - npm run release
-        - echo: "版本生成完成"
+        - "echo: '版本生成完成'"
 
     - state: build
       script:
-        - echo: "开始打包..."
+        - "echo: '开始打包...'"
         - npm run build
-        - echo: "打包完成"
+        - "echo: '打包完成'"
       deploy:
         provider: npm
         email: wang11535041@qq.com
