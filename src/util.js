@@ -28,11 +28,11 @@ export function convertToTree({ data = [], pid = 0, children = 'children', pidNa
  * @param {*} pidName    父级标识key
  * @param result // 返回结果
  */
-export function getParentsFromArray({id, data, idName = 'id', pidName = 'parentId', result = []}) {
+export function getParentsFromArray({ id, data, idName = 'id', pidName = 'parentId', result = [] }) {
   for (const item of data) {
     if (item[idName] === id) {
       result.unshift(item);
-      getParentsFromArray({ id:item[pidName], data, idName, pidName, result });
+      getParentsFromArray({ id: item[pidName], data, idName, pidName, result });
     }
   }
   return result;

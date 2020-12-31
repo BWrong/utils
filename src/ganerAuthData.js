@@ -1,10 +1,9 @@
-
 /*
  * @Author: Bwrong
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-19 23:02:23
+ * @LastEditTime: 2020-12-31 11:17:17
  */
 let routeMap = {}; // 路由映射表
 const defaultAuthKey = 'permission';
@@ -61,7 +60,7 @@ function _getAuthRoutes(routes = [], authMap = {}, checkAuth = _checkAuth, merge
  * @param {*} menus  菜单数据
  * @param {*} authKey 权限集权限标识key名
  */
-function _addPathOfMenus(routeMap = {}, menus = [], authKey=defaultAuthKey) {
+function _addPathOfMenus(routeMap = {}, menus = [], authKey = defaultAuthKey) {
   return menus.map((item) => {
     item.url = (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
@@ -92,5 +91,5 @@ function _mergeMeta(routeMeta, authMeta) {
  * @param {*} key
  */
 function _checkParamIsArray(param, key) {
-  return Array.isArray(param) || (console.error(`@bwrong/auth-tool/ganerAuthData: ${key}参数传入数据类型不正确，请传入Array数据类型`),false);
+  return Array.isArray(param) || (console.error(`@bwrong/auth-tool/ganerAuthData: ${key}参数传入数据类型不正确，请传入Array数据类型`), false);
 }
