@@ -92,7 +92,7 @@ export default [
   },
   {
     "id": 4,
-    "code": "user",
+    "permission": "user",
     "name": "用户管理",
     "type": 0,
     "parentId": 0
