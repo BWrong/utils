@@ -14,7 +14,7 @@
   "scripts": {
     "build": "rollup -c",
     "commit": "git add . && git-cz",
-    "release": "standard-version --infile CHANGELOG.md"
+    "release": "npm run build && standard-version --infile CHANGELOG.md"
   },
   "publishConfig": {
     "access": "public"
