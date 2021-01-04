@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "1.2.3",
+  "version": "1.2.2",
   "author": "bwrong<ibwrong@foxmail.com>",
   "license": "MIT",
   "keywords": [
@@ -14,7 +14,7 @@
   "scripts": {
     "build": "rollup -c",
     "commit": "git add . && git-cz",
-    "release": "npm run build && standard-version --infile CHANGELOG.md"
+    "release": "standard-version --infile CHANGELOG.md && npm run build"
   },
   "publishConfig": {
     "access": "public"
