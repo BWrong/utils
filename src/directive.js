@@ -8,6 +8,9 @@ export const authDirective = {
     Vue.directive(directiveName, {
       inserted(el, binding) {
         !hasAuth(binding.value) && el.parentNode?.removeChild(el);
+      },
+      mounted(el, binding) {
+        !hasAuth(binding.value) && el.parentNode?.removeChild(el);
       }
     });
   }
