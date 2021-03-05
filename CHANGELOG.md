@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.4](https://github.com/BWrong/auth-tool/compare/v1.2.3...v1.2.4) (2021-03-05)
+
+
+### Bug Fixes
+
+* 菜单路径支持path字段 ([1262c01](https://github.com/BWrong/auth-tool/commit/1262c019531bafd03e31c10a9b641535bc29fa4a))
+
 ### [1.2.3](https://github.com/BWrong/auth-tool/compare/v1.2.2...v1.2.3) (2021-03-03)
 * 指令增加对Vue3.0支持
 
