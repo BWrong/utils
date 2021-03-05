@@ -3,7 +3,7 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2020-12-31 11:17:17
+ * @LastEditTime: 2021-03-05 16:43:05
  */
 let routeMap = {}; // 路由映射表
 const defaultAuthKey = 'permission';
@@ -62,7 +62,7 @@ function _getAuthRoutes(routes = [], authMap = {}, checkAuth = _checkAuth, merge
  */
 function _addPathOfMenus(routeMap = {}, menus = [], authKey = defaultAuthKey) {
   return menus.map((item) => {
-    item.url = (item[authKey] && routeMap[item[authKey]]?.path) || '';
+    item.url = item.path = (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
       item.children = _addPathOfMenus(routeMap, menus, authKey);
     }
