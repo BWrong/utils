@@ -1,12 +1,19 @@
 module.exports = {
   root: true,
   env: {
+    browser: true,
     node: true
   },
-  extends: ['eslint:recommended'],
+  extends: [
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'prettier/@typescript-eslint'
+  ],
+  plugins: ['@typescript-eslint'],
   parserOptions: {
     ecmaVersion: 2020,
-    parser: 'babel-eslint'
+    parser: '@typescript-eslint/parser'
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
