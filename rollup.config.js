@@ -2,12 +2,13 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import { babel } from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 // import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import pkg from './package.json';
 const libName = 'authTool';
 const banner = `/* libName: ${libName} version: ${pkg.version} author: ${pkg.author} */`;
 const config = {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
@@ -33,12 +34,13 @@ const config = {
         console.groupEnd(id)
       }
     }),
+    typescript(),
     babel({
       exclude: 'node_modules/**',
       babelHelpers: 'bundled'
     })
   ],
-  // external: []
+  external: ['vue']
 
   // globals:{},
 };

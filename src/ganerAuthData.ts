@@ -3,9 +3,9 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2021-03-05 16:43:05
+ * @LastEditTime: 2021-05-31 15:28:41
  */
-let routeMap = {}; // 路由映射表
+let routeMap:Record<string,any> = {}; // 路由映射表
 const defaultAuthKey = 'permission';
 export default ({ routes = [], permissions = [], authKey = defaultAuthKey, checkAuth = _checkAuth, mergeMeta = _mergeMeta }) => {
   // 校验参数
@@ -39,7 +39,7 @@ function _ganAuthMap(permissions = [], authKey = defaultAuthKey) {
  * @param {*} checkAuth 权限检查方法
  * @param {*} mergeMeta meta数据合并策略
  */
-function _getAuthRoutes(routes = [], authMap = {}, checkAuth = _checkAuth, mergeMeta = _mergeMeta) {
+function _getAuthRoutes(routes:any[] = [], authMap:Record<string,any> = {}, checkAuth = _checkAuth, mergeMeta = _mergeMeta) {
   return routes.filter((route) => {
     if (checkAuth(route, authMap)) {
       if (route.meta?.permission) {
@@ -60,7 +60,7 @@ function _getAuthRoutes(routes = [], authMap = {}, checkAuth = _checkAuth, merge
  * @param {*} menus  菜单数据
  * @param {*} authKey 权限集权限标识key名
  */
-function _addPathOfMenus(routeMap = {}, menus = [], authKey = defaultAuthKey) {
+function _addPathOfMenus(routeMap:Record<string,any> = {}, menus:Record<string,any>[] = [], authKey = defaultAuthKey) {
   return menus.map((item) => {
     item.url = item.path = (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
@@ -74,7 +74,7 @@ function _addPathOfMenus(routeMap = {}, menus = [], authKey = defaultAuthKey) {
  * @param {*} route 检测的路由对象
  * @param {*} authMap 权限标识表, object, key为的值（配置的authKey的值）
  */
-function _checkAuth(route, authMap) {
+function _checkAuth(route:any, authMap:any) {
   return route.meta?.permission ? !!authMap[route.meta.permission] : true;
 }
 /**
@@ -82,7 +82,7 @@ function _checkAuth(route, authMap) {
  * @param {*} routeMeta 路由meta数据
  * @param {*} authMeta 路由对应权限菜单数据
  */
-function _mergeMeta(routeMeta, authMeta) {
+function _mergeMeta(routeMeta:object, authMeta:object) {
   return Object.assign(routeMeta, authMeta);
 }
 /**
@@ -90,6 +90,6 @@ function _mergeMeta(routeMeta, authMeta) {
  * @param {*} param
  * @param {*} key
  */
-function _checkParamIsArray(param, key) {
+function _checkParamIsArray(param:any, key:string) {
   return Array.isArray(param) || (console.error(`@bwrong/auth-tool/ganerAuthData: ${key}参数传入数据类型不正确，请传入Array数据类型`), false);
 }
