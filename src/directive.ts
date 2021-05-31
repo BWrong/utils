@@ -1,11 +1,11 @@
-import { App, DirectiveBinding } from 'vue'
+import { App, DirectiveBinding, Plugin } from 'vue'
 
 /**
  * 注册权限指令
  * @param {*} directiveName  指令名字
  * @param {*} hasAuth  检查函数
  */
-export const authDirective = {
+export const authDirective:Plugin = {
   install(Vue:any, { directiveName = 'auth', hasAuth = (value?:string) => true } = {}) {
     if (isVue3(Vue)) {
       Vue.directive(directiveName, {
