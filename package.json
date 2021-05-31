@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "author": "bwrong<ibwrong@foxmail.com>",
   "license": "MIT",
   "keywords": [
@@ -10,7 +10,7 @@
   "description": "vue项目资源（菜单、路由、按钮...）权限控制解决方案",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
-  "typings": "index.d.ts",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "release": "standard-version --infile CHANGELOG.md && npm run build"
@@ -31,9 +31,7 @@
     "node": ">=12"
   },
   "files": [
-    "lib/*",
-    "src/*",
-    "index.d.ts"
+    "lib/*"
   ],
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -63,6 +61,7 @@
     }
   },
   "peerDependencies": {
-    "vue": "^3.0.11"
+    "vue": "^3.0.11",
+    "vue-router": "^4.0.8"
   }
 }

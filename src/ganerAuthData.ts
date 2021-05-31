@@ -3,21 +3,19 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2021-05-31 16:20:48
+ * @LastEditTime: 2021-05-31 17:26:01
  */
-
+import {RouteRecordRaw} from 'vue-router'
 type CheckAuth = (route: Route, authMap: Record<string, any>) => boolean;
 type MergeMeta = (routeMeta: object, authMeta: Record<string, any>) => object;
 
 interface RouteMeta {
-  permission: string;
+  permission?: string;
+  [key:string]:any
 }
-
-interface Route {
-  path: string;
-  meta?: RouteMeta | undefined;
-  children?: Route[];
-  [key: string]: any;
+type Route = RouteRecordRaw & {
+  meta?: RouteMeta | undefined,
+  children?: Route[]
 }
 
 export interface GanerAuthDataOptins {

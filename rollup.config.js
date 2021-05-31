@@ -34,7 +34,7 @@ const config = {
       babelHelpers: 'bundled'
     })
   ],
-  external: ['vue']
+  external: ['vue','vue-router']
 
   // globals:{},
 };
