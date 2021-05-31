@@ -5,11 +5,16 @@
  */
 export const authDirective = {
   install(Vue, { directiveName = 'auth', hasAuth = () => true } = {}) {
+    if (Vue.version.match(/^3/)) {
+      Vue.directive(directiveName, {
+        mounted(el, binding) {
+          !hasAuth(binding.value) && el.parentNode?.removeChild(el);
+        }
+      });
+      return;
+    }
     Vue.directive(directiveName, {
       inserted(el, binding) {
-        !hasAuth(binding.value) && el.parentNode?.removeChild(el);
-      },
-      mounted(el, binding) {
         !hasAuth(binding.value) && el.parentNode?.removeChild(el);
       }
     });
