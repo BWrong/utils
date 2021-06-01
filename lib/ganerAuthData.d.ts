@@ -15,11 +15,12 @@ export interface GanerAuthDataOptins {
     authKey?: string;
     checkAuth?: CheckAuth;
     mergeMeta?: MergeMeta;
+    prefix?: string;
 }
 export interface AuthData {
     authMap: object;
     routes: Route[];
     menus: object[];
 }
-declare const _default: ({ routes, permissions, authKey, checkAuth, mergeMeta }: GanerAuthDataOptins) => AuthData;
+declare const _default: ({ routes, permissions, authKey, checkAuth, mergeMeta, prefix }: GanerAuthDataOptins) => AuthData;
 export default _default;
