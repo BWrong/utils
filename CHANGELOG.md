@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/BWrong/auth-tool/compare/v1.2.8...v1.3.0) (2021-06-01)
+
+
+### Features
+
+* 增加嵌套路由写法支持 ([9a65486](https://github.com/BWrong/auth-tool/commit/9a654868f3faa88819ef67471df79d4d09493d53))
+
 ### [1.2.8](https://github.com/BWrong/auth-tool/compare/v1.2.5...v1.2.8) (2021-05-31)
 
 
