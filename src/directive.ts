@@ -13,6 +13,7 @@ export const authDirective:Plugin = {
           !hasAuth(binding.value) && el.parentNode?.removeChild(el);
         }
       });
+      return;
     }
     Vue.directive(directiveName, {
       inserted(el:Element, binding:DirectiveBinding<any>) {
