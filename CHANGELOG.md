@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.2](https://github.com/BWrong/auth-tool/compare/v1.3.1...v1.3.2) (2021-06-08)
+
+
+### Bug Fixes
+
+* 修复指令重复注册问题 ([5d91fdc](https://github.com/BWrong/auth-tool/commit/5d91fdcf67847f2d26161a32d67643bc798a84d4))
+
 ### [1.3.1](https://github.com/BWrong/auth-tool/compare/v1.3.0...v1.3.1) (2021-06-01)
 
 
