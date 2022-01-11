@@ -3,7 +3,7 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2021-06-01 11:20:03
+ * @LastEditTime: 2022-01-11 21:32:07
  */
 import {RouteRecordRaw} from 'vue-router'
 type CheckAuth = (route: Route, authMap: Record<string, any>) => boolean;
@@ -94,7 +94,7 @@ function _addPathOfMenus(
   authKey = defaultAuthKey
 ) {
   return menus.map((item) => {
-    item.url = item.path = (item[authKey] && routeMap[item[authKey]]?.path) || '';
+    item.url = item.url || (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
       item.children = _addPathOfMenus(routeMap, menus, authKey);
     }
