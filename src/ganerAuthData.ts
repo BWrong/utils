@@ -3,7 +3,7 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2022-01-11 21:32:07
+ * @LastEditTime: 2022-01-11 21:37:23
  */
 import {RouteRecordRaw} from 'vue-router'
 type CheckAuth = (route: Route, authMap: Record<string, any>) => boolean;
@@ -74,7 +74,7 @@ function _getAuthRoutes(
         route.path = route.path.match(/^\/.+/) ? route.path : `${prefix}/${route.path}`
         // 将路由存入routeMap, 方便_addPathOfMenus查找路由
         routeMap[route.meta.permission] = route;
-        route.meta = mergeMeta(route.meta, authMap[route.meta.permission]) as RouteMeta;
+        route.meta = mergeMeta(route.meta, authMap[route.meta.permission]) as Route['meta'];
       }
       route.children && (route.children = _getAuthRoutes(route.children, authMap, route.path));
       return true;

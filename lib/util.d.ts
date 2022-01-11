@@ -1,20 +1,20 @@
 /********** 工具函数 ************/
 /**
  * 将一维数组格式转换成树结构
- * TODO: 考虑使用尾递归优化算法。
  * @param {*} data  需要转换的数据
  * @param {*} pid   顶级节点的id
  * @param {*} children   子集标识key
  * @param {*} pidName    父级标识key
  * @param {*} idName     id标识key
  */
-export declare function convertToTree({ data, pid, children, pidName, idName }: {
-    data?: never[] | undefined;
-    pid?: number | undefined;
-    children?: string | undefined;
-    pidName?: string | undefined;
-    idName?: string | undefined;
-}): any[];
+interface _ITreeData {
+    data: any[];
+    pid?: number | string;
+    children?: string;
+    pidName?: string;
+    idName?: string;
+}
+export declare function convertToTree({ data, pid, children, pidName, idName }: _ITreeData): any;
 /**
  * 从数组中根据id获取所有父级元素，返回数组
  * TODO: 考虑使用尾递归优化算法
