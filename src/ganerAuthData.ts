@@ -3,9 +3,9 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2022-01-11 21:37:23
+ * @LastEditTime: 2022-04-12 14:32:07
  */
-import {RouteRecordRaw} from 'vue-router'
+import {RouteRecordRaw} from 'vue-router';
 type CheckAuth = (route: Route, authMap: Record<string, any>) => boolean;
 type MergeMeta = (routeMeta: object, authMeta: Record<string, any>) => object;
 
@@ -71,7 +71,7 @@ function _getAuthRoutes(
     if (checkAuth(route, authMap)) {
       if (route.meta?.permission) {
         // 处理嵌套路由写法
-        route.path = route.path.match(/^\/.+/) ? route.path : `${prefix}/${route.path}`
+        route.path = route.path.match(/^\/.+/) ? route.path : `${prefix}/${route.path}`;
         // 将路由存入routeMap, 方便_addPathOfMenus查找路由
         routeMap[route.meta.permission] = route;
         route.meta = mergeMeta(route.meta, authMap[route.meta.permission]) as Route['meta'];
@@ -94,7 +94,7 @@ function _addPathOfMenus(
   authKey = defaultAuthKey
 ) {
   return menus.map((item) => {
-    item.url = item.url || (item[authKey] && routeMap[item[authKey]]?.path) || '';
+    item.url = item.path = item.url || (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
       item.children = _addPathOfMenus(routeMap, menus, authKey);
     }
