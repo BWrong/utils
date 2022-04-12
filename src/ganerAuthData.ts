@@ -94,7 +94,7 @@ function _addPathOfMenus(
   authKey = defaultAuthKey
 ) {
   return menus.map((item) => {
-    item.url = item.path = item.url || (item[authKey] && routeMap[item[authKey]]?.path) || '';
+    item.url = item.url || (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
       item.children = _addPathOfMenus(routeMap, menus, authKey);
     }
