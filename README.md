@@ -101,6 +101,64 @@ export default [
 ]
 ```
 
+**注意：**
+如果使用数据是树形数组，则需要使用内置的`convertTreeToArray`进行处理后，再传入`ganerAuthData`
+```json
+[
+    {
+        "id": 1,
+        "permission": "system",
+        "title": "系统管理",
+        "type": 0,
+        "priority": 0,
+        "icon": "icon-setting",
+        "parentId": 0,
+        "url": "/system",
+        "children": [
+            {
+                "id": 2,
+                "permission": "system/config",
+                "title": "系统配置",
+                "type": 0,
+                "priority": 0,
+                "icon": "icon-setting",
+                "parentId": 1,
+                "url": "/system/config",
+                "children": []
+            },
+            {
+                "id": 3,
+                "permission": "system/menu",
+                "title": "菜单管理",
+                "type": 0,
+                "priority": 0,
+                "icon": "icon-appstore-o",
+                "parentId": 1,
+                "url": "/system/menu",
+                "children": []
+            },
+            // ...
+        ]
+    },
+    {
+        "id": 9,
+        "permission": "system",
+        "title": "系统管理2",
+        "type": 0,
+        "priority": 0,
+        "icon": "icon-setting",
+        "parentId": 0,
+        "url": "/system",
+        "children": [
+            // ...
+        ]
+    }
+]
+```
+```
+
+```
+
 - authKey：配置权限标识的 key 名，默认为`permission`。
 上面permissions（权限映射表）中用来标识权限标识的key名，因为permissions数据由后端提供，所以权限标识的key不同项目可能会不一样，可通过authKey参数配置修改。但是此配置不影响routes路由配置表中的key名，因为路由由前端自己配置，可以保证数据格式的统一。
 
@@ -131,7 +189,11 @@ function mergeMeta(routeMeta, authMeta) {
 
 调用方法并生成需要的数据：
 ```js
-import { ganerAuthData } from '@bwrong/auth-tool';
+import { ganerAuthData,util } from '@bwrong/auth-tool';
+// permissions为非树形结构
+const { authMap, routes, menus } = ganerAuthData({ routes, permissions, authKey: 'permission' });
+// permissions为树形结构
+permissions = util.convertTreeToArray(permissions)
 const { authMap, routes, menus } = ganerAuthData({ routes, permissions, authKey: 'permission' });
 // 返回数据说明
 //- routes: 清洗后的路由，过滤调了没权限的路由，用于动态注册路由

@@ -14,7 +14,7 @@
   pidName?: string;
   idName?: string;
 }
-export function convertToTree({ data = [], pid = 0, children = 'children', pidName = 'parentId', idName = 'id' }:_ITreeData) {
+export function convertArrayToTree({ data = [], pid = 0, children = 'children', pidName = 'parentId', idName = 'id' }:_ITreeData) {
   const tree:any[] = [],
     map:Record<string,any> = {};
   data.forEach((item) => {
@@ -27,6 +27,27 @@ export function convertToTree({ data = [], pid = 0, children = 'children', pidNa
     }
   });
   return pid ? map[pid] : tree;
+}
+type TreeData = {
+  children?: TreeData[];
+}
+/**
+ * 将树形数组转换成一维数组
+ * @param treeData
+ * @param result
+ * @returns
+ */
+export function convertTreeToArray<T extends TreeData>(treeData: T[], result: T[] = []) {
+  treeData.forEach((node) => {
+    result.push({
+      ...node,
+      children: []
+    });
+    if (node.children?.length) {
+      convertTreeToArray(node.children, result);
+    }
+  });
+  return result;
 }
 /**
  * 从数组中根据id获取所有父级元素，返回数组
