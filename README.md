@@ -155,8 +155,9 @@ export default [
     }
 ]
 ```
-```
-
+```ts
+import { util } from '@bwrong/auth-tool';
+permissions = util.convertTreeToArray(permissions)
 ```
 
 - authKey：配置权限标识的 key 名，默认为`permission`。
