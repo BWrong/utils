@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/BWrong/auth-tool/compare/v2.0.0...v2.2.0) (2022-11-03)
+
+
+### Features
+
+* 增加对树形结构数据支持 ([9979707](https://github.com/BWrong/auth-tool/commit/9979707309bb01f4e26d4fa81cb5ef5644d49d80))
+
+
+### Bug Fixes
+
+* 去掉菜单的path字段，仅能使用url，避免混淆 ([9aaff7f](https://github.com/BWrong/auth-tool/commit/9aaff7fcfae895ca83db5fb054d033f4b05afb8d))
+
 ## [2.0.0](https://github.com/BWrong/auth-tool/compare/v1.3.4...v2.0.0) (2022-04-12)
 
 ### [1.3.4](https://github.com/BWrong/auth-tool/compare/v1.3.3...v1.3.4) (2022-04-12)

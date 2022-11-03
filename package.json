@@ -1,8 +1,9 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "author": "bwrong<ibwrong@foxmail.com>",
   "license": "MIT",
+  "type": "module",
   "keywords": [
     "auth",
     "vue"
