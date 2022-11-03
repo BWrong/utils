@@ -14,7 +14,17 @@ interface _ITreeData {
     pidName?: string;
     idName?: string;
 }
-export declare function convertToTree({ data, pid, children, pidName, idName }: _ITreeData): any;
+export declare function convertArrayToTree({ data, pid, children, pidName, idName }: _ITreeData): any;
+declare type TreeData = {
+    children?: TreeData[];
+};
+/**
+ * 将树形数组转换成一维数组
+ * @param treeData
+ * @param result
+ * @returns
+ */
+export declare function convertTreeToArray<T extends TreeData>(treeData: T[], result?: T[]): T[];
 /**
  * 从数组中根据id获取所有父级元素，返回数组
  * TODO: 考虑使用尾递归优化算法

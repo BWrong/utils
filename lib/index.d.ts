@@ -1,4 +1,4 @@
-import { GanerAuthDataOptins, AuthData } from './ganerAuthData';
-import { Plugin } from 'vue';
-export declare const ganerAuthData: (options: GanerAuthDataOptins) => AuthData;
-export declare const authDirective: Plugin;
+export { authDirective } from './directive';
+export { default as ganerAuthData } from './ganerAuthData';
+import * as utils from './util';
+export declare const util: typeof utils;

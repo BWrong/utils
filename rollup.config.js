@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import { babel } from '@rollup/plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json';
+import pkg from './package.json' assert {type: 'json'};
 const libName = 'authTool';
 const banner = `/* libName: ${libName} version: ${pkg.version} author: ${pkg.author} */`;
 const config = {
