@@ -1,0 +1,22 @@
+{
+  "name": "@example/vite",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@bwrong/request": "workspace:*",
+    "@bwrong/storage": "workspace:*",
+    "@bwrong/auth-tool": "workspace:auth",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.8",
+    "vue-tsc": "^1.6.5"
+  }
+}

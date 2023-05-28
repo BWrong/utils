@@ -1,0 +1,58 @@
+{
+  "name": "@bwrong/auth-tool",
+  "version": "2.2.0",
+  "description": "vue项目资源（菜单、路由、按钮...）权限控制解决方案",
+  "keywords": [
+    "auth",
+    "vue"
+  ],
+  "homepage": "https://github.com/BWrong/utils/tree/main/packages/storage#readme",
+  "bugs": {
+    "url": "https://github.com/BWrong/utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BWrong/utils.git",
+    "directory": "packages/storage"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "bwrong",
+    "email": "ibwrong@foxmail.com",
+    "url": "https://github.com/BWrong"
+  },
+  "contributors": [
+    {
+      "name": "bwrong",
+      "email": "ibwrong@foxmail.com",
+      "url": "https://github.com/BWrong"
+    }
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "release": "release-it"
+  },
+  "peerDependencies": {
+    "vue": "^2.0.0 || ^3.0.0",
+    "vue-router": "^3.0.0 || ^4.0.0"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

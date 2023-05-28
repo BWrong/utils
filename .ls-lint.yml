@@ -1,0 +1,12 @@
+ls:
+  packages:
+    .dir: kebab-case
+    .js: kebab-case
+    .ts: kebab-case
+    .d.ts: kebab-case
+    .esm.js: kebab-case
+    .cmj.js: kebab-case
+ignore:
+  - node_modules
+  - dist
+  - packages/request/node_modules

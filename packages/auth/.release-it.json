@@ -1,0 +1,13 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tag": false,
+    "requireCleanWorkingDir": false
+  },
+  "github": {
+    "release": false
+  },
+  "hooks": {
+    "before:init": "pnpm build"
+  }
+}
