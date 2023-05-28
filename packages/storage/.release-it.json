@@ -7,6 +7,9 @@
   "github": {
     "release": false
   },
+  "npm":{
+    "publish": false
+  },
   "hooks": {
     "before:init": "pnpm build"
   }
