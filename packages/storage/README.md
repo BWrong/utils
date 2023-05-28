@@ -1,7 +1,7 @@
 # @bwrong/storage
 ![npm](https://img.shields.io/npm/dt/@bwrong/storage) ![npm](https://img.shields.io/npm/v/@bwrong/storage)
 
-为了解决本地缓存（localStorage或sessionStorage）的一些痛点,进行二次封装。
+为了解决本地缓存（localStorage或sessionStorage）的一些痛点,进行二次封装的本地缓存插件。
 
 - 可设置驱动，支持localStorage和sessionStorage。
 - 支持设置前缀，避免冲突

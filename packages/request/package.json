@@ -1,8 +1,13 @@
 {
   "name": "@bwrong/request",
-  "version": "0.0.1",
-  "description": "",
-  "keywords": [],
+  "version": "1.0.0",
+  "description": "基于 axios 二次封装的请求库",
+  "keywords": [
+    "axios",
+    "request",
+    "http",
+    "fetch"
+  ],
   "homepage": "https://github.com/BWrong/utils/tree/main/packages/request#readme",
   "bugs": {
     "url": "https://github.com/BWrong/utils/issues"
@@ -47,6 +52,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "axios":">=1.4.0"
   },
   "devDependencies": {
     "axios": "^1.4.0"
