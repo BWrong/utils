@@ -8,7 +8,7 @@
     "release": false
   },
   "npm":{
-    "publish": false
+    "publish": true
   },
   "hooks": {
     "before:init": "pnpm build"
