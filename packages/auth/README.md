@@ -1,26 +1,33 @@
 # Auth-Tool
 
-![npm](https://img.shields.io/npm/dt/@BWrong/utils)
-![npm](https://img.shields.io/npm/v/@BWrong/utils)
-![NPM](https://img.shields.io/npm/l/@BWrong/utils)
-![build](https://api.travis-ci.org/BWrong/utils.svg?branch=master)
+![npm](https://img.shields.io/npm/dt/@bwrong/auth-tool)
+![npm](https://img.shields.io/npm/v/@bwrong/auth-tool)
+![NPM](https://img.shields.io/npm/l/@bwrong/auth-tool)
 ![GitHub stars](https://img.shields.io/github/stars/BWrong/utils?style=social)
 
-vue 项目资源权限控制解决方案。管理系统一般都会包含权限控制，登录不同的用户可以看到不同的资源（菜单、路由、按钮等），此工具封装了权限处理逻辑，资源权限和路由仅通过一个权限标识关联对应，最大程度降低耦合，通过这个标识可以完成很多功能：
+一款适用于Vue3的权限控制工具，可以实现菜单、按钮等资源权限控制，可以满足管理系统中灵活的权限控制需求。
 
-1. 清洗出有权限的路由，并动态注册到路由，实现菜单和路由的控制。
-2. 通过标识对比，将路由的 path 添加到菜单（前面后台返回的资源权限），这样后台不需要设置菜单 url，即可用于渲染导航菜单。
-3. 内置了权限指令，可以通过将某个权限标识和生成的权限集做对比，从而判断是否具有权限来决定显示状态。
+提供如下功能：
+- 根据后端设置的权限集过滤出有权限的路由，用作动态路由，以实现页面（路由）的权限控制。
+- 根据权限标识，将对应路由的path 添加到菜单的url字段，即可用于渲染导航菜单，当然如果菜单数据本身具有url，则优先使用菜单自身的url。
+- 内置权限指令和权限组件，可实现页面元素，如按钮、tab等元素的权限控制。
+- 还内置了一些函数，可以自己实现更加复杂的需求。
+
+**注意：V3版本属于重构，V2版本不能直接升级，且V3版本仅支持Vue3，不再兼容Vue2**
 
 ### 使用方法
 #### 安装
 ```shell
-npm install -S @BWrong/utils
+npm install -S @BWrong/auth-tool
 ```
-#### 生成相关数据
-
-##### 通过调用`ganerAuthData(options)`生成相关数据
-
+#### `initAuth(options)`权限数据处理
+```ts
+import { initAuth } from '@BWrong/auth-tool';
+const { routes, menus } = initAuth({ routes, permissions, authKey: 'permission' });
+// 返回数据说明
+//- routes: 过滤了没权限的路由，可用于动态注册路由
+//- menus:注入了路由path的权限集数据（菜单），可用于渲染菜单
+```
 **options：**
 
 - routes：动态路由配置表，数据格式如下：
@@ -102,7 +109,7 @@ export default [
 ```
 
 **注意：**
-如果使用数据是树形数组，则需要使用内置的`convertTreeToArray`进行处理后，再传入`ganerAuthData`
+要求传入的permissions为一维数组格式，如果使用数据是树形数组，则需要使用内置的`convertTreeToArray`进行处理后，再传入`initAuth`
 ```json
 [
     {
@@ -156,26 +163,22 @@ export default [
 ]
 ```
 ```ts
-import { util } from '@BWrong/utils';
-permissions = util.convertTreeToArray(permissions)
+import { convertTreeToArray } from '@BWrong/auto-tool';
+permissions = convertTreeToArray(permissions)
 ```
+- authKey：**权限集**中用于标识权限的字段名，默认为`permission`，仅用于控制权限集，和路由中的`meta.permission`没关系，路由的这个不可修改，必须为permission。之所以权限集中可修改，是因为该数据来自后台，不可控。
 
-- authKey：配置权限标识的 key 名，默认为`permission`。
-上面permissions（权限映射表）中用来标识权限标识的key名，因为permissions数据由后端提供，所以权限标识的key不同项目可能会不一样，可通过authKey参数配置修改。但是此配置不影响routes路由配置表中的key名，因为路由由前端自己配置，可以保证数据格式的统一。
-
-- `checkAuth(route, authMap)`: 权限过滤方法。
+- `checkAuth(route, authMap)`: 权限过滤方法，一般不需要修改。
 返回true通过校验，返回false则会忽略该项。默认为：
 ```js
 /**
- * 清洗方法，权限标识不存在或者存在且匹配,则返回true
+ * 清洗方法，权限标识不存在或者存在且匹配，则返回true
  * @param {*} route 检测的路由对象
- * @param {*} authMap 权限标识表，map
+ * @param {*} permissionMap 权限标识表, object, key配置的authKey的值
  */
-function checkAuth(route, authMap) {
-  return route.meta?.permission ? !!authMap[route.meta.permission] : true;
-}
+const checkAuth: CheckAuth = (route, permissionMap) => (route.meta?.permission ? !!permissionMap[route.meta.permission] : true);
 ```
-- `mergeMeta(routeMeta, authMeta)`: 定义route.meta数据的合并策略。
+- `mergeMeta(routeMeta, authMeta)`: 定义route.meta数据的合并策略，一般不需要修改。
 返回合并后的数据，返回的数据会覆盖`route.meta`。
 ```js
 /**
@@ -183,55 +186,61 @@ function checkAuth(route, authMap) {
  * @param {*} routeMeta 路由meta数据
  * @param {*} authMeta 路由对应权限菜单数据
  */
-function mergeMeta(routeMeta, authMeta) {
-  return Object.assign(routeMeta, authMeta)
+const mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, authMeta);
+```
+
+#### 控制页面资源权限
+使用前需要先注册：
+```ts
+import { authPlugin } from '@BWrong/auto-tool';
+const app = createApp(App);
+app.use(authPlugin)
+```
+- `v-auth`指令
+```html
+<!-- 单个值 -->
+<a-button v-auth="'user:edit'">按钮</a-button>
+<!-- 多个值数组，可通过参数配置对比策略，默认是every, 必须都满足才有权限 -->
+<a-button v-auth="['user:edit','user:add']">按钮</a-button>
+<a-button v-auth:every="['user:edit','user:add']">按钮</a-button>
+<!-- some, 满足其一即有权限 -->
+<a-button v-auth:some="['user:add','user:add']">按钮</a-button>
+```
+- 组件`Auth`
+```html
+<Auth value="user:edit">
+  <!-- 需要控制权限的元素 -->
+  <button>按钮</button>
+</Auth>
+<Auth :value="['user:edit','user:add']" model="every">
+  <!-- 需要控制权限的元素 -->
+  <button>按钮</button>
+</Auth>
+<Auth :value="['user:edit','user:add']" model="some">
+  <!-- 需要控制权限的元素 -->
+  <button>按钮</button>
+</Auth>
+```
+
+#### 其他API
+##### 权限信息
+- `getPermissionKeys()`：获取权限集keys
+- `setPermissionKeys(permissionKeys: string[])`: 设置权限集keys
+- `addPermissionKeys(keys: string[])`：添加权限集keys
+- `removePermissionKeys(keys: string[])`：移除权限集keys
+- `hasPermission(
+  permission: string | string[],
+  model: typeof permission extends string ? never : 'every' | 'some' = 'every'
+)`：判断是否有权限
+
+- `getPermissionsData`：获取权限集数据
+- `getPermissionsTree(options: ITreeData)`：获取权限集树形数据
+```ts
+interface ITreeData {
+  pid?: number | string;
+  children?: string;
+  pidName?: string;
+  idName?: string;
 }
 ```
-
-调用方法并生成需要的数据：
-```js
-import { ganerAuthData,util } from '@BWrong/utils';
-// permissions为非树形结构
-const { authMap, routes, menus } = ganerAuthData({ routes, permissions, authKey: 'permission' });
-// permissions为树形结构
-permissions = util.convertTreeToArray(permissions)
-const { authMap, routes, menus } = ganerAuthData({ routes, permissions, authKey: 'permission' });
-// 返回数据说明
-//- routes: 清洗后的路由，过滤调了没权限的路由，用于动态注册路由
-//- authMap: 权限映射表，用于根据权限标识查找对应的菜单
-//- menus: 添加了对应url的菜单，用于渲染菜单
-```
-
-#### 控制页面资源
-
-- 使用`v-auth`指令
-
-```js
-import Vue from 'vue';
-import { getStorage } from '@/utils/storage';
-import { authDirective } from '@BWrong/utils';
-let authMap = null;
-// 注册权限指令
-Vue.use(authDirective, {
-  directiveName: 'auth', // 注册指令的名字，默认为auth
-  hasAuth(authValue) { // 需要传入对比方法，返回false的资源将被移除，默认均返回true，不过滤
-    authMap = authMap || getStorage('permissions') || [];
-    return authMap.includes(authValue);
-  }
-});
-```
-
-```html
-<!-- 按钮 -->
-<a-button v-auth="'btn_ipBinding_edit'">权限资源</a-button>
-<!-- 选项卡 -->
-<a-tabs default-active-key="1" @change="callback">
-  <a-tab-pane key="1" tab="Tab 1">1</a-tab-pane>
-  <a-tab-pane key="2" tab="Tab 2" v-auth="'btn_ipBinding_edit'">2</a-tab-pane>
-  <a-tab-pane key="3" tab="Tab 3">3</a-tab-pane>
-</a-tabs>
-<!-- 更多 -->
-```
-- 其他方式（自行实现）
-
-除了上述指令的方式，还可以自己封装组件，将需要控制的元素用该组件包裹，在组件内部判断是否显示包裹的资源。
+- `clearAuth()`：清除权限数据
