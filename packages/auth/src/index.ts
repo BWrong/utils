@@ -3,15 +3,24 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-12-10 11:04:57
  * @LastEditors: Bwrong
- * @LastEditTime: 2023-05-28 21:56:45
+ * @LastEditTime: 2023-05-31 15:07:32
  */
-export { authDirective } from './directive';
-export { default as ganerAuthData } from './ganerAuthData';
-import * as utils from './util';
-export const util = utils;
+import type { Plugin } from 'vue';
+import { createComponent, createDirective } from './plugin';
+import { storage } from './storage';
+export { convertArrayToTree, convertTreeToArray, getParentsFromArray } from './util';
+export { getPermissionKeys, setPermissionKeys, addPermissionKeys, removePermissionKeys, hasPermission } from './permissions';
+export { getPermissionsData, getPermissionsTree, storage } from './storage';
 
-// 1. 管理token，set，remove，has，isExpired
-// 2. 处理权限ganerAuthData getMenuList getMenuTree getPermissions hasAccess setPermissions
-// 支持多种模式，1. 动态路由：后端提供菜单，动态生成路由   2. 静态路由，菜单和路由均由前端提供
-//
-// 3. 注册权限指令、组件
+export { default as ganerAuthData } from './ganerAuthData';
+
+export const clearAuth = () => {
+  storage.clear();
+};
+// 注册权限指令、组件
+export const authPlugin: Plugin = {
+  install(app) {
+    createDirective(app);
+    createComponent(app);
+  },
+};

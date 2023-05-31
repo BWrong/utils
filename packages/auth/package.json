@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "vue项目资源（菜单、路由、按钮...）权限控制解决方案",
   "keywords": [
     "auth",
@@ -47,9 +47,13 @@
     "build": "unbuild",
     "release": "release-it"
   },
+  "dependencies": {
+    "@bwrong/storage": "workspace:*"
+  },
   "peerDependencies": {
     "vue": "^2.0.0 || ^3.0.0",
-    "vue-router": "^3.0.0 || ^4.0.0"
+    "vue-router": "^3.0.0 || ^4.0.0",
+    "@bwrong/storage": ">=1.0.3"
   },
   "engines": {
     "node": ">=16"

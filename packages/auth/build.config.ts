@@ -7,5 +7,5 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true,
   },
-  externals: ['vue','vue-router']
+  externals: ['vue', 'vue-router', '@bwrong/storage'],
 });

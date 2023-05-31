@@ -7,17 +7,17 @@
  * @param {*} pidName    父级标识key
  * @param {*} idName     id标识key
  */
- interface _ITreeData {
+interface ITreeData {
   data: any[];
   pid?: number | string;
   children?: string;
   pidName?: string;
   idName?: string;
 }
-export function convertArrayToTree({ data = [], pid = 0, children = 'children', pidName = 'parentId', idName = 'id' }:_ITreeData) {
-  const tree:any[] = [],
-    map:Record<string,any> = {};
-  data.forEach((item) => {
+export function convertArrayToTree({ data = [], pid = 0, children = 'children', pidName = 'parentId', idName = 'id' }: ITreeData) {
+  const tree: any[] = [],
+    map: Record<string, any> = {};
+  data.forEach(item => {
     item[children] = map[item[idName]] = map[item[idName]] || [];
     if (item[pidName]) {
       map[item[pidName]] = map[item[pidName]] || [];
@@ -30,7 +30,7 @@ export function convertArrayToTree({ data = [], pid = 0, children = 'children', 
 }
 type TreeData = {
   children?: TreeData[];
-}
+};
 /**
  * 将树形数组转换成一维数组
  * @param treeData
@@ -38,10 +38,10 @@ type TreeData = {
  * @returns
  */
 export function convertTreeToArray<T extends TreeData>(treeData: T[], result: T[] = []) {
-  treeData.forEach((node) => {
+  treeData.forEach(node => {
     result.push({
       ...node,
-      children: []
+      children: [],
     });
     if (node.children?.length) {
       convertTreeToArray(node.children, result);
@@ -58,14 +58,14 @@ export function convertTreeToArray<T extends TreeData>(treeData: T[], result: T[
  * @param {*} pidName    父级标识key
  * @param result // 返回结果
  */
-interface _IParams {
+interface IParams {
   id: string;
   data: any[];
   idName?: string;
   pidName?: string;
   result?: object[];
 }
-export function getParentsFromArray({ id, data, idName = 'id', pidName = 'parentId', result = [] }: _IParams) {
+export function getParentsFromArray({ id, data, idName = 'id', pidName = 'parentId', result = [] }: IParams) {
   for (const item of data) {
     if (item[idName] === id) {
       result.unshift(item);
