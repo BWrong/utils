@@ -1,6 +1,7 @@
 # @bwrong/request
 
 ![npm](https://img.shields.io/npm/dt/@bwrong/request) ![npm](https://img.shields.io/npm/v/@bwrong/request)
+![GitHub stars](https://img.shields.io/github/stars/BWrong/utils?style=social)
 
 基于 axios 二次封装的请求库。
 

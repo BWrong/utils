@@ -1,5 +1,6 @@
 # @bwrong/storage
 ![npm](https://img.shields.io/npm/dt/@bwrong/storage) ![npm](https://img.shields.io/npm/v/@bwrong/storage)
+![GitHub stars](https://img.shields.io/github/stars/BWrong/utils?style=social)
 
 为了解决本地缓存（localStorage或sessionStorage）的一些痛点,进行二次封装的本地缓存插件。
 

@@ -108,12 +108,15 @@ importers:
 
   packages/auth:
     dependencies:
+      '@bwrong/storage':
+        specifier: workspace:*
+        version: link:../storage
       vue:
-        specifier: ^2.0.0 || ^3.0.0
+        specifier: '>=3.0.0'
         version: 3.3.4
       vue-router:
-        specifier: ^3.0.0 || ^4.0.0
-        version: 3.0.0(vue@3.3.4)
+        specifier: '>=4.0.0'
+        version: 4.0.0(vue@3.3.4)
 
   packages/request:
     devDependencies:
@@ -7082,10 +7085,10 @@ packages:
       - supports-color
     dev: true
 
-  /vue-router@3.0.0(vue@3.3.4):
-    resolution: {integrity: sha512-qcS2QzYrT5r/TIEdtbar41joxX/MUsfNPB3k/yrRbowyKowXnY4NG1XFM4K2HFsugXXolTkyFfKrDas5+FRcBA==}
+  /vue-router@4.0.0(vue@3.3.4):
+    resolution: {integrity: sha512-RiAsDsSV73TBqppgpAKghb5exHHKsFuTii7hbhj9QHjWJNDE4lBDTr7bVALG9DH9vVcFI+7PUTBGYbytBFsWsQ==}
     peerDependencies:
-      vue: ^2
+      vue: ^3.0.0
     dependencies:
       vue: 3.3.4
     dev: false
