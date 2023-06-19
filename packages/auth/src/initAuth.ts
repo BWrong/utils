@@ -65,7 +65,9 @@ const _mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, 
  * @param {*} mergeMeta meta数据合并策略
  */
 function _getAuthRoutes(routes: Route[] = [], permissionMap: Record<string, any> = {}, prefix = '', checkAuth = _checkAuth, mergeMeta = _mergeMeta) {
-  return routes.filter(route => {
+  return routes.filter(item => {
+    // 防止影响原数据
+    let route = { ...item };
     if (checkAuth(route, permissionMap)) {
       if (route.meta?.permission) {
         // 处理嵌套路由写法
