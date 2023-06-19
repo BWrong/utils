@@ -5,18 +5,18 @@
  * @LastEditors: Bwrong
  * @LastEditTime: 2022-04-12 14:32:07
  */
-import {RouteRecordRaw} from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 type CheckAuth = (route: Route, authMap: Record<string, any>) => boolean;
 type MergeMeta = (routeMeta: object, authMeta: Record<string, any>) => object;
 
 interface RouteMeta {
   permission?: string;
-  [key:string]:any
+  [key: string]: any;
 }
 type Route = RouteRecordRaw & {
-  meta?: RouteMeta | undefined,
-  children?: Route[]
-}
+  meta?: RouteMeta | undefined;
+  children?: Route[];
+};
 
 export interface GanerAuthDataOptins {
   routes: Route[];
@@ -24,7 +24,7 @@ export interface GanerAuthDataOptins {
   authKey?: string;
   checkAuth?: CheckAuth;
   mergeMeta?: MergeMeta;
-  prefix?: string
+  prefix?: string;
 }
 
 export interface AuthData {
@@ -45,14 +45,14 @@ function _ganAuthMap(permissions: any[] = [], authKey = defaultAuthKey) {
  * @param {*} route 检测的路由对象
  * @param {*} authMap 权限标识表, object, key为的值（配置的authKey的值）
  */
- const _checkAuth: CheckAuth = (route, authMap) => (route.meta?.permission ? !!authMap[route.meta.permission] : true);
+const _checkAuth: CheckAuth = (route, authMap) => (route.meta?.permission ? !!authMap[route.meta.permission] : true);
 
- /**
-  * route.meta数据合并策略
-  * @param {*} routeMeta 路由meta数据
-  * @param {*} authMeta 路由对应权限菜单数据
-  */
- const _mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, authMeta);
+/**
+ * route.meta数据合并策略
+ * @param {*} routeMeta 路由meta数据
+ * @param {*} authMeta 路由对应权限菜单数据
+ */
+const _mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, authMeta);
 /**
  * 清洗路由，获取具有权限的路由
  * @param {*} routes 前端路由映射表
@@ -67,7 +67,9 @@ function _getAuthRoutes(
   checkAuth = _checkAuth,
   mergeMeta = _mergeMeta
 ) {
-  return routes.filter((route) => {
+  return routes.filter((item) => {
+    // 防止污染原路由数据
+    let route = { ...item };
     if (checkAuth(route, authMap)) {
       if (route.meta?.permission) {
         // 处理嵌套路由写法
@@ -122,7 +124,7 @@ export default ({
   authKey = defaultAuthKey,
   checkAuth = _checkAuth,
   mergeMeta = _mergeMeta,
-  prefix=''
+  prefix = ''
 }: GanerAuthDataOptins): AuthData => {
   // 校验参数
   _checkParamIsArray(routes, 'routes');
@@ -130,7 +132,7 @@ export default ({
   // 权限映射表
   const authMap = _ganAuthMap(permissions, authKey);
   // 清洗后，有权限额路由，用于动态注册路由
-  const authRoutes = _getAuthRoutes(routes, authMap,prefix, checkAuth, mergeMeta);
+  const authRoutes = _getAuthRoutes(routes, authMap, prefix, checkAuth, mergeMeta);
   // 添加了path/url的菜单，用于渲染导航
   const menusWithPath = _addPathOfMenus(routeMap, permissions, authKey);
   return {

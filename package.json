@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "author": "bwrong<ibwrong@foxmail.com>",
   "license": "MIT",
   "type": "module",
@@ -49,7 +49,9 @@
     "rollup-plugin-typescript2": "^0.34.1",
     "standard-version": "^9.5.0",
     "tslib": "^2.4.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.2"
   },
   "config": {
     "commitizen": {
