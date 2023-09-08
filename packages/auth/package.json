@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/auth-tool",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "一款适用于Vue3的权限控制工具，可以实现菜单、按钮等资源权限控制",
   "keywords": [
     "auth",
@@ -49,7 +49,7 @@
     "build": "unbuild",
     "release": "release-it"
   },
-  "dependencies": {
+  "devDependencies": {
     "@bwrong/storage": "workspace:*"
   },
   "peerDependencies": {
