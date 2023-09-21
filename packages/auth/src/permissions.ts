@@ -40,6 +40,7 @@ export const removePermissionKeys = (keys: string[]) => {
  */
 export const hasPermission = (permission: string | string[], model: typeof permission extends string ? never : 'every' | 'some' = 'every') => {
   const permissionKeys = getPermissionKeys();
+  if (!permission.length) return false;
   if (Array.isArray(permission)) {
     return model === 'some' ? permission.some(item => permissionKeys.includes(item)) : permission.every(item => permissionKeys.includes(item));
   }
