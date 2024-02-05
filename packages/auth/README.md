@@ -37,7 +37,7 @@ export default [
   {
     path: '/system',
     name: 'system',
-    redirect: '/system/department',
+    redirect: '/system/department', // 如果不设置redirect，则使用children中的第一个（有权限的）
     meta: {
       permission: 'system'
     },

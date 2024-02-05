@@ -3,7 +3,7 @@
  * @Github: https://github.com/BWrong
  * @Date: 2020-07-03 15:57:14
  * @LastEditors: Bwrong
- * @LastEditTime: 2023-05-31 17:13:35
+ * @LastEditTime: 2024-02-05 17:25:11
  */
 import type { RouteRecordRaw } from 'vue-router';
 import { setPermissionKeys } from './permissions';
@@ -76,7 +76,10 @@ function _getAuthRoutes(routes: Route[] = [], permissionMap: Record<string, any>
         cacheRouteMap[route.meta.permission] = route;
         route.meta = mergeMeta(route.meta, permissionMap[route.meta.permission]) as Route['meta'];
       }
-      route.children && (route.children = _getAuthRoutes(route.children, permissionMap, route.path));
+      if (route.children) {
+        route.redirect = route.redirect || route.children?.[0]?.redirect || route.path;
+        route.children = _getAuthRoutes(route.children, permissionMap, route.path);
+      }
       return true;
     }
     return false;
