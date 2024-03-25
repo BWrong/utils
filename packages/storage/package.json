@@ -1,6 +1,6 @@
 {
   "name": "@bwrong/storage",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "为了解决本地缓存（localStorage或sessionStorage）的一些痛点,进行二次封装的本地缓存插件",
   "keywords": [
     "storage",
