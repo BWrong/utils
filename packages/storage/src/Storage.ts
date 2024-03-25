@@ -92,9 +92,18 @@ export default class UStorage {
   }
   /**
    * 清除缓存
+   * @param excludeKeys
    */
-  clear() {
-    this.driver.clear();
+  clear(excludeKeys?: string[]) {
+    if (excludeKeys?.length) {
+      for (const key in localStorage) {
+        if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
+          excludeKeys.includes(key) || this.driver.removeItem(key);
+        }
+      }
+    } else {
+      this.driver.clear();
+    }
   }
   private getKey(key: string) {
     return this.prefix + key;

@@ -20,6 +20,6 @@ export const removeStorage = (...keys: string[]) => {
   return globalStorage.remove(...keys);
 };
 // 清楚缓存
-export const clearStorage = () => {
-  return globalStorage.clear();
+export const clearStorage = (excludeKeys?: string[]) => {
+  return globalStorage.clear(excludeKeys);
 };
