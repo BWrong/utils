@@ -34,8 +34,9 @@ setStorage(key, value, { expire: 10 }); //设置缓存
 getStorage(key); //获取缓存
 removeStorage(key1，key2); //移除特定标识缓存
 clearStorage(); //清除所有缓存
+clearStorage(['key1']); //清除除key1外的所有缓存
 ```
-2. 自己实例化
+1. 自己实例化
 ```ts
 import UStorage from '@bwrong/storage';
 // import Utf8 from 'crypto-js/enc-utf8';
@@ -110,5 +111,5 @@ export interface StorageConfig {
 - `remove(...keys: string[])`
 移除缓存
 
-- `clear`
+- `clear(excludeKeys?:string[])`
 清除缓存
