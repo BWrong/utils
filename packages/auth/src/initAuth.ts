@@ -109,7 +109,29 @@ function _addUrlToPermissions(routeMap: Record<string, Route> = {}, permissions:
 function _checkParamIsArray(param: any, key: string) {
   return Array.isArray(param) || (console.error(`${pkgName}: ${key}参数传入数据类型不正确，请传入Array数据类型`), false);
 }
+function getFirstPageUrl(routes:any,permissionMap:any) {
+  let url = '';
 
+  for (const item of routes) {
+    if (item.children?.length) {
+      url = getFirstPageUrl(item.children,permissionMap);
+      break;
+    } else if (item.meta.permission && permissionMap[item.meta.permission]?.type === 'menu') {
+      url = item.path || item.url;
+      break;
+    }
+  }
+  return url;
+}
+function setRedirect(routes:any,permissionMap:any) {
+  return routes.map((item) => {
+    if (item.children?.length) {
+      // item.redirect = item.redirect || getFirstPageUrl(item.children,permissionMap) ;
+    }
+    return item;
+  });
+
+}
 export default ({ routes = [], permissions = [], authKey = 'permission', checkAuth, mergeMeta }: InitAuthOptins): AuthData => {
   // 校验参数
   _checkParamIsArray(routes, 'routes');
@@ -123,7 +145,7 @@ export default ({ routes = [], permissions = [], authKey = 'permission', checkAu
   const permissionsWithUrl = _addUrlToPermissions(cacheRouteMap, permissions, authKey);
   setPermissionsData(permissionsWithUrl);
   return {
-    routes: authRoutes,
+    routes: setRedirect(authRoutes, permissionMap),
     permissionsData: permissionsWithUrl,
   };
 };
