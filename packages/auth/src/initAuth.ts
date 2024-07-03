@@ -124,7 +124,7 @@ function getFirstPageUrl(routes:any,permissionMap:any) {
   return url;
 }
 function setRedirect(routes:any,permissionMap:any) {
-  return routes.map((item) => {
+  return routes.map((item:any) => {
     if (item.children?.length) {
       // item.redirect = item.redirect || getFirstPageUrl(item.children,permissionMap) ;
     }
