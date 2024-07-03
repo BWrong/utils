@@ -78,7 +78,7 @@ function _getAuthRoutes(routes: Route[] = [], permissionMap: Record<string, any>
       }
       if (route.children) {
         route.children = _getAuthRoutes(route.children, permissionMap, route.path);
-        item.redirect = route.redirect || (route.children?.[0]?.path || '');
+        // item.redirect = route.redirect || (route.children?.[0]?.path || '');
       }
       return true;
     }
@@ -126,7 +126,7 @@ function getFirstPageUrl(routes:any,permissionMap:any) {
 function setRedirect(routes:any,permissionMap:any) {
   return routes.map((item:any) => {
     if (item.children?.length) {
-      // item.redirect = item.redirect || getFirstPageUrl(item.children,permissionMap) ;
+      item.redirect = item.redirect || getFirstPageUrl(item.children,permissionMap) ;
     }
     return item;
   });
