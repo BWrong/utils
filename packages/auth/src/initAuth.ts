@@ -26,6 +26,7 @@ export interface InitAuthOptins {
   authKey?: string;
   checkAuth?: CheckAuth;
   mergeMeta?: MergeMeta;
+  getRedirectUrl?: (routes: Route[], permissionMap: Record<string, any>) => string;
   prefix?: string;
 }
 
@@ -57,6 +58,27 @@ const _checkAuth: CheckAuth = (route, permissionMap) => (route.meta?.permission 
  * @param {*} authMeta 路由对应权限菜单数据
  */
 const _mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, authMeta);
+
+/**
+ * 获取路由重定向地址
+ * @param {*} routes 路由对象
+ * @param {*} permissionMap 权限标识表
+ * @returns 路由重定向地址
+ */
+function _getRedirectUrl(routes: any, permissionMap: any) {
+  let url = '';
+
+  for (const item of routes) {
+    if (item.children?.length) {
+      url = _getRedirectUrl(item.children, permissionMap);
+      break;
+    } else {
+      url = item.path || item.url;
+      break;
+    }
+  }
+  return url;
+}
 /**
  * 清洗路由，获取具有权限的路由
  * @param {*} routes 前端路由映射表
@@ -64,21 +86,19 @@ const _mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, 
  * @param {*} checkAuth 权限检查方法
  * @param {*} mergeMeta meta数据合并策略
  */
-function _getAuthRoutes(routes: Route[] = [], permissionMap: Record<string, any> = {}, prefix = '', checkAuth = _checkAuth, mergeMeta = _mergeMeta) {
-  return routes.filter(item => {
-    // 防止影响原数据
-    let route = { ...item };
+function _getAuthRoutes(routes: Route[] = [], permissionMap: Record<string, any> = {}, prefix = '', checkAuth = _checkAuth, mergeMeta = _mergeMeta, getRedirectUrl = _getRedirectUrl) {
+  return routes.filter(route => {
     if (checkAuth(route, permissionMap)) {
+      // 处理嵌套路由写法
+      route.path = route.path.startsWith('/') ? route.path : `${prefix}/${route.path}`;
       if (route.meta?.permission) {
-        // 处理嵌套路由写法
-        route.path = route.path.match(/^\/.+/) ? route.path : `${prefix}/${route.path}`;
         // 将路由存入routeMap, 方便_addUrlToPermissions查找路由
         cacheRouteMap[route.meta.permission] = route;
         route.meta = mergeMeta(route.meta, permissionMap[route.meta.permission]) as Route['meta'];
       }
       if (route.children) {
-        route.children = _getAuthRoutes(route.children, permissionMap, route.path);
-        // item.redirect = route.redirect || (route.children?.[0]?.path || '');
+        route.children = _getAuthRoutes(route.children, permissionMap, route.path, checkAuth, mergeMeta, getRedirectUrl);
+        route.redirect = route.redirect ?? getRedirectUrl(route.children, permissionMap);
       }
       return true;
     }
@@ -93,6 +113,7 @@ function _getAuthRoutes(routes: Route[] = [], permissionMap: Record<string, any>
  */
 function _addUrlToPermissions(routeMap: Record<string, Route> = {}, permissions: Record<string, any>[] = [], authKey: string) {
   return permissions.map(item => {
+    // 如果有url，则使用，没有则取路由映射表的path
     item.url = item.url || (item[authKey] && routeMap[item[authKey]]?.path) || '';
     if (item.children?.length) {
       item.children = _addUrlToPermissions(routeMap, permissions, authKey);
@@ -109,43 +130,26 @@ function _addUrlToPermissions(routeMap: Record<string, Route> = {}, permissions:
 function _checkParamIsArray(param: any, key: string) {
   return Array.isArray(param) || (console.error(`${pkgName}: ${key}参数传入数据类型不正确，请传入Array数据类型`), false);
 }
-function getFirstPageUrl(routes:any,permissionMap:any) {
-  let url = '';
 
-  for (const item of routes) {
-    if (item.children?.length) {
-      url = getFirstPageUrl(item.children,permissionMap);
-      break;
-    } else if (item.meta.permission && permissionMap[item.meta.permission]?.type === 'menu') {
-      url = item.path || item.url;
-      break;
-    }
-  }
-  return url;
-}
-function setRedirect(routes:any,permissionMap:any) {
-  return routes.map((item:any) => {
-    if (item.children?.length) {
-      item.redirect = item.redirect || getFirstPageUrl(item.children,permissionMap) ;
-    }
-    return item;
-  });
-
-}
-export default ({ routes = [], permissions = [], authKey = 'permission', checkAuth, mergeMeta }: InitAuthOptins): AuthData => {
+export default ({ routes = [], permissions = [], authKey = 'permission', checkAuth, mergeMeta, getRedirectUrl }: InitAuthOptins): AuthData => {
   // 校验参数
   _checkParamIsArray(routes, 'routes');
   _checkParamIsArray(permissions, 'permissions');
+  cacheRouteMap = {};
   // 权限映射表
   const permissionMap = _permissionToMap(permissions, authKey);
+  console.log('permissionMap:', permissionMap);
+  // 将权限标识key存入缓存
   setPermissionKeys(Object.keys(permissionMap));
   // 清洗后，有权限额路由，用于动态注册路由
-  const authRoutes = _getAuthRoutes(routes, permissionMap, '', checkAuth, mergeMeta);
+  const authRoutes = _getAuthRoutes(routes, permissionMap, '', checkAuth, mergeMeta, getRedirectUrl);
+  console.log('authRoutes:', authRoutes);
+
   // 添加了path/url的菜单，用于渲染导航
   const permissionsWithUrl = _addUrlToPermissions(cacheRouteMap, permissions, authKey);
   setPermissionsData(permissionsWithUrl);
   return {
-    routes: setRedirect(authRoutes, permissionMap),
+    routes: authRoutes,
     permissionsData: permissionsWithUrl,
   };
 };

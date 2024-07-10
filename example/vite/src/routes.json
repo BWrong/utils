@@ -1,0 +1,482 @@
+[
+  {
+    "path": "/",
+    "name": "root",
+    "redirect": "/home",
+    "children": [
+      {
+        "path": "/home",
+        "name": "home",
+        "meta": {
+          "title": "首页",
+          "hideBreadcrumb": true
+        }
+      },
+      {
+        "path": "/message",
+        "meta": {
+          "title": "消息中心",
+          "showBreadcrumbBack": true
+        }
+      },
+      {
+        "path": "/personal",
+        "meta": {
+          "title": "个人中心",
+          "showBreadcrumbBack": true
+        }
+      }
+    ]
+  },
+  {
+    "path": "/sales",
+    "meta": {
+      "permission": "sales"
+    },
+    "children": [
+      {
+        "path": "/sales/follow",
+        "meta": {
+          "permission": "sales/follow"
+        }
+      },
+      {
+        "path": "/sales/follow/add",
+        "meta": {
+          "permission": "sales/follow/add",
+          "activeMenu": "/sales/follow",
+          "title": "创建目标订单"
+        }
+      },
+      {
+        "path": "/sales/follow/edit",
+        "meta": {
+          "permission": "sales/follow/edit",
+          "activeMenu": "/sales/follow",
+          "title": "编辑目标订单"
+        }
+      },
+      {
+        "path": "/sales/follow/detail",
+        "meta": {
+          "activeMenu": "/sales/follow",
+          "title": "详情"
+        }
+      },
+      {
+        "path": "/sales/follow/import",
+        "meta": {
+          "permission": "sales/follow/import",
+          "activeMenu": "/sales/follow",
+          "title": "导入目标订单"
+        }
+      },
+      {
+        "path": "/sales/stage",
+        "meta": {
+          "permission": "sales/stage"
+        }
+      },
+      {
+        "path": "/sales/seas",
+        "meta": {
+          "permission": "sales/seas"
+        }
+      },
+      {
+        "path": "/sales/seas/setting",
+        "meta": {
+          "activeMenu": "/sales/seas",
+          "title": "公海设置"
+        }
+      },
+      {
+        "path": "/sales/order",
+        "meta": {
+          "permission": "sales/order"
+        }
+      },
+      {
+        "path": "/sales/delivery-order/import",
+        "meta": {
+          "permission": "sales/delivery-order/import",
+          "activeMenu": "/sales/delivery-order",
+          "title": "导入订单"
+        }
+      },
+      {
+        "path": "/sales/order/import",
+        "meta": {
+          "permission": "sales/order/import",
+          "activeMenu": "/sales/order",
+          "title": "导入合同"
+        }
+      },
+      {
+        "path": "/sales/order/add",
+        "meta": {
+          "permission": "sales/order/add",
+          "activeMenu": "/sales/order",
+          "title": "创建销售合同"
+        }
+      },
+      {
+        "path": "/sales/order/edit",
+        "meta": {
+          "permission": "sales/order/edit",
+          "activeMenu": "/sales/order",
+          "title": "编辑销售合同"
+        }
+      },
+      {
+        "path": "/sales/order/detail",
+        "meta": {
+          "activeMenu": "/sales/order",
+          "title": "详情"
+        }
+      },
+      {
+        "path": "/sales/order/setting",
+        "meta": {
+          "permission": "sales/order/setting",
+          "activeMenu": "/sales/order",
+          "title": "订单设置"
+        }
+      },
+      {
+        "path": "/sales/delivery-order",
+        "meta": {
+          "permission": "sales/delivery-order"
+        }
+      },
+      {
+        "path": "/sales/delivery-order/add",
+        "meta": {
+          "permission": "sales/delivery-order/add",
+          "activeMenu": "/sales/delivery-order",
+          "title": "创建发货订单"
+        }
+      },
+      {
+        "path": "/sales/return-order",
+        "meta": {
+          "permission": "sales/return-order"
+        }
+      },
+      {
+        "path": "/sales/return-order/add",
+        "meta": {
+          "permission": "sales/return-order/add",
+          "activeMenu": "/sales/return-order",
+          "title": "创建退货单"
+        }
+      },
+      {
+        "path": "/sales/exchange-order",
+        "meta": {
+          "permission": "sales/exchange-order"
+        }
+      },
+      {
+        "path": "/sales/exchange-order/add",
+        "meta": {
+          "permission": "sales/exchange-order/add",
+          "activeMenu": "/sales/exchange-order",
+          "title": "创建换货单"
+        }
+      },
+      {
+        "path": "/sales/setting",
+        "meta": {
+          "permission": "sales/setting"
+        }
+      },
+      {
+        "path": "/sales/sample-application",
+        "meta": {
+          "permission": "sales/sample-application"
+        }
+      },
+      {
+        "path": "/sales/sample-application/add",
+        "meta": {
+          "permission": "sales/sample-application/add",
+          "activeMenu": "/sales/sample-application",
+          "title": "创建送样申请"
+        }
+      },
+      {
+        "path": "/sales/sample-application/detail",
+        "meta": {
+          "activeMenu": "/sales/sample-application",
+          "title": "详情"
+        }
+      },
+      {
+        "path": "/sales/feedback",
+        "meta": {
+          "permission": "sales/feedback"
+        }
+      },
+      {
+        "path": "/sales/setting/field",
+        "meta": {
+          "permission": "sales/setting",
+          "activeMenu": "/sales/setting",
+          "title": "字段设置"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/customer",
+    "meta": {
+      "permission": "customer"
+    },
+    "children": [
+      {
+        "path": "/customer/all",
+        "meta": {
+          "permission": "customer/all"
+        }
+      },
+      {
+        "path": "/customer/add",
+        "meta": {
+          "activeMenu": "/customer/all",
+          "title": "创建客户"
+        }
+      },
+      {
+        "path": "/customer/detail",
+        "meta": {
+          "activeMenu": "/customer/all",
+          "title": "客户详情"
+        }
+      },
+      {
+        "path": "/customer/import",
+        "meta": {
+          "activeMenu": "/customer/all",
+          "title": "导入客户"
+        }
+      },
+      {
+        "path": "/customer/important",
+        "meta": {
+          "permission": "customer/important"
+        }
+      },
+      {
+        "path": "/customer/successful",
+        "meta": {
+          "permission": "customer/successful"
+        }
+      },
+      {
+        "path": "/customer/dormant",
+        "meta": {
+          "permission": "customer/dormant"
+        }
+      },
+      {
+        "path": "/customer/stop",
+        "meta": {
+          "permission": "customer/stop"
+        }
+      },
+      {
+        "path": "/customer/enterprise-check",
+        "meta": {
+          "permission": "customer/enterprise-check"
+        }
+      },
+      {
+        "path": "/customer/tag",
+        "meta": {
+          "permission": "customer/tag"
+        }
+      },
+      {
+        "path": "/customer/contact",
+        "meta": {
+          "permission": "customer/contact"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/goods",
+    "meta": {
+      "permission": "goods"
+    },
+    "children": [
+      {
+        "path": "/goods/list",
+        "meta": {
+          "permission": "goods/list"
+        }
+      },
+      {
+        "path": "/goods/list/import",
+        "meta": {
+          "activeMenu": "/goods/list",
+          "title": "导入商品"
+        }
+      },
+      {
+        "path": "/goods/list/add",
+        "meta": {
+          "activeMenu": "/goods/list",
+          "title": "创建商品"
+        }
+      },
+      {
+        "path": "/goods/list/edit",
+        "meta": {
+          "activeMenu": "/goods/list",
+          "title": "编辑商品"
+        }
+      },
+      {
+        "path": "/goods/list/detail",
+        "meta": {
+          "activeMenu": "/goods/list",
+          "title": "详情"
+        }
+      },
+      {
+        "path": "/goods/list/quotation",
+        "meta": {
+          "activeMenu": "/goods/list",
+          "title": "生成报价单"
+        }
+      },
+      {
+        "path": "/goods/tag",
+        "meta": {
+          "permission": "goods/tag"
+        }
+      },
+      {
+        "path": "/goods/quote",
+        "meta": {
+          "permission": "goods/quote"
+        }
+      },
+      {
+        "path": "/goods/quote/detail",
+        "meta": {
+          "activeMenu": "/goods/quote",
+          "title": "详情"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/workbench",
+    "meta": {
+      "permission": "workbench"
+    },
+    "children": [
+      {
+        "path": "/workbench/report",
+        "meta": {
+          "permission": "workbench/report"
+        }
+      },
+      {
+        "path": "/workbench/contract",
+        "meta": {
+          "permission": "workbench/contract"
+        }
+      },
+      {
+        "path": "/workbench/contract/addContract",
+        "meta": {
+          "activeMenu": "/workbench/contract",
+          "title": "新建销售合同"
+        }
+      },
+      {
+        "path": "/workbench/contract/editContract",
+        "meta": {
+          "activeMenu": "/workbench/contract",
+          "title": "编辑合同"
+        }
+      },
+      {
+        "path": "/workbench/contract/addContract1",
+        "meta": {
+          "activeMenu": "/workbench/contract",
+          "title": "新建销售合同"
+        }
+      },
+      {
+        "path": "/workbench/contract/addTemp",
+        "meta": {
+          "activeMenu": "/workbench/contract",
+          "title": "新建销售合同模板"
+        }
+      },
+      {
+        "path": "/workbench/contract/editTemp",
+        "meta": {
+          "activeMenu": "/workbench/contract",
+          "title": "编辑合同模板"
+        }
+      },
+      {
+        "path": "/workbench/approval",
+        "meta": {
+          "permission": "workbench/approval"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/setting",
+    "meta": {
+      "permission": "setting"
+    },
+    "children": [
+      {
+        "path": "/setting/department",
+        "meta": {
+          "permission": "setting/department"
+        }
+      },
+      {
+        "path": "/setting/analysis",
+        "meta": {
+          "permission": "setting/analysis"
+        }
+      },
+      {
+        "path": "/setting/role",
+        "meta": {
+          "permission": "setting/role"
+        }
+      },
+      {
+        "path": "/setting/field",
+        "meta": {
+          "permission": "setting/field"
+        }
+      },
+      {
+        "path": "/setting/field/edit",
+        "meta": {
+          "activeMenu": "/setting/field",
+          "title": "字段设置"
+        }
+      },
+      {
+        "path": "/setting/log",
+        "meta": {
+          "permission": "setting/log"
+        }
+      }
+    ]
+  }
+]

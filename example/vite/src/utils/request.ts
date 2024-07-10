@@ -1,4 +1,4 @@
-import Request, { ERROR_CODE } from '@bwrong/request';
+import Request from '@bwrong/request';
 import type { RequestInterceptor, RequestTransform, RequestResponse } from '@bwrong/request';
 import { ENV } from '@/utils/env';
 
@@ -43,7 +43,7 @@ const transforms: RequestTransform = {
     if (!error) {
       return result;
     } else {
-      return ERROR_CODE;
+      return 'responseTransform: error';
     }
   },
   // responseTransformCatch(err) {

@@ -1,19 +1,16 @@
 import { storage } from './storage';
 const storageKey = 'permissionKeys';
-let cachePermissionKeys: string[] = storage.get(storageKey) || [];
-
 /**
  * 获取权限集
  */
-export const getPermissionKeys = () => cachePermissionKeys || [];
+export const getPermissionKeys: () => string[] = () => storage.get(storageKey) || [];
 /**
  * 设置权限集
  * @param permissionKeys
  */
 export const setPermissionKeys = (permissionKeys: string[]) => {
   storage.set(storageKey, permissionKeys);
-  cachePermissionKeys = permissionKeys;
-  return cachePermissionKeys;
+  return permissionKeys;
 };
 /**
  * 添加权限
