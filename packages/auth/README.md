@@ -188,7 +188,28 @@ const checkAuth: CheckAuth = (route, permissionMap) => (route.meta?.permission ?
  */
 const mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, authMeta);
 ```
-
+- `getRedirectUrl(routes,permissionMap)`: 自定义获取路由redirect方法
+```ts
+/**
+ * 获取路由重定向地址
+ * @param {*} routes 路由对象
+ * @param {*} permissionMap 权限标识表
+ * @returns 路由重定向地址
+ */
+function _getRedirectUrl(routes: any, permissionMap: any) {
+  let url = '';
+  for (const item of routes) {
+    if (item.children?.length) {
+      url = _getRedirectUrl(item.children, permissionMap);
+      break;
+    } else {
+      url = item.path || item.url;
+      break;
+    }
+  }
+  return url;
+}
+```
 #### 控制页面资源权限
 使用前需要先注册：
 ```ts

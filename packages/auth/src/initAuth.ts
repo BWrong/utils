@@ -67,7 +67,6 @@ const _mergeMeta: MergeMeta = (routeMeta, authMeta) => Object.assign(routeMeta, 
  */
 function _getRedirectUrl(routes: any, permissionMap: any) {
   let url = '';
-
   for (const item of routes) {
     if (item.children?.length) {
       url = _getRedirectUrl(item.children, permissionMap);
@@ -138,13 +137,10 @@ export default ({ routes = [], permissions = [], authKey = 'permission', checkAu
   cacheRouteMap = {};
   // 权限映射表
   const permissionMap = _permissionToMap(permissions, authKey);
-  console.log('permissionMap:', permissionMap);
   // 将权限标识key存入缓存
   setPermissionKeys(Object.keys(permissionMap));
   // 清洗后，有权限额路由，用于动态注册路由
   const authRoutes = _getAuthRoutes(routes, permissionMap, '', checkAuth, mergeMeta, getRedirectUrl);
-  console.log('authRoutes:', authRoutes);
-
   // 添加了path/url的菜单，用于渲染导航
   const permissionsWithUrl = _addUrlToPermissions(cacheRouteMap, permissions, authKey);
   setPermissionsData(permissionsWithUrl);
